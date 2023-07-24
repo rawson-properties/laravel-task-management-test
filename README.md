@@ -13,11 +13,10 @@ You are tasked with creating a basic web application for managing tasks. The app
    - Each task has a title, description, and due date.
 
 2. One-to-One Relationship:
-   - Each task can have one assigned user.
-   - Each user can have only one assigned task.
+   - Each task can have one assigned user (E.g a task may have an owner, and an assignee).
 
 3. One-to-Many Relationship:
-   - Each user can have multiple tasks in their task list.
+   - Each user can have multiple tasks in their task list (Tasks that the user owns).
    - Each task belongs to only one user.
 
 4. Create an API for creating, Upating and Deleting tasks. **API authentication in NOT required, but if time permits, choose between Passport and Sanctum**.
