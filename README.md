@@ -46,6 +46,7 @@ You are tasked with creating a basic web application for managing tasks. The app
 Submit your pull request with the completed practical test. Include any necessary instructions on running the application and tests. Be prepared to explain your code and discuss your approach during the evaluation.
 
 ## Note:
+- No GUI is required.
 - You can use any additional packages or libraries that you find helpful.
 - Focus on writing clean, maintainable code.
 - Good luck! We look forward to reviewing your work!
