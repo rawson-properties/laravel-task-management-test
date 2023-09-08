@@ -18,7 +18,7 @@ You are tasked with creating a basic web application for managing tasks. **The a
 
 **Requirements**
 
-Create an REST API for the above features. You are free to decide how you do this, but consider the following endpoint ideas:
+Create a REST API for the above features. You are free to decide how you do this, but consider the following endpoint ideas:
 
    - A user can create an account
    - A user can log in the application
