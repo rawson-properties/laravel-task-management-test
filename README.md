@@ -30,7 +30,7 @@ Create a REST API for the above features. You are free to decide how you do this
 
 **Considerations**
 
-   - Your API will be consumed by an SPA. It may make sense to secure the API with JWT/Oauth-like service? You are free to decide. Personally I like to use Sanctum or Passport for this.
+   - Your API will be consumed by an SPA. It may make sense to secure the API with JWT/OAuth-like service? You are free to decide - as long as you can motivate your decision. Personally I like to use Sanctum or Passport for this.
    - Detatching the Thank You email from the account creating flow for performance and better user experience (Hint: Use a queued Job).
    - Cache the task list for 1 hour, and it should refresh after the cache expires (Bonus).
 
