@@ -2,7 +2,7 @@
 
 ## Introduction:
 
-Welcome to the practical test for the Senior Engineering position. This test is designed to assess your skills and understanding of Laravel concepts, including writing tests, working with database migrations, creating one-to-one/one-to-many relationships, creating api's and working with queues. Additionally, there is a bonus section for optimizing queues. Please read the problem statement carefully and follow the instructions provided.
+Welcome to the practical test for the Senior Engineering position. This test is designed to assess your skills and understanding of Laravel concepts, including writing tests, working with database migrations, creating one-to-one/one-to-many relationships, creating api's and working with queues. Additionally, there is a bonus section for optimising queues. Please read the problem statement carefully and follow the instructions provided.
 
 ## Problem Statement:
 
