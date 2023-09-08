@@ -14,7 +14,7 @@ You are tasked with creating a basic web application for managing tasks. **The a
    - Users can create, view, update, and delete tasks (CRUD).
    - Each task has a title, description, and due date (DB Fields).
    - Each task must have an owner (One-to-One Relationship).
-   - Each user can have multiple tasks in their task list (Tasks that the user owns/or asigned to) (One-to-Many Relationship).
+   - Each user can have multiple tasks in their task list (Tasks that the user owns/or is assigned to) (One-to-Many Relationship).
 
 **Requirements**
 
