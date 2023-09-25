@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
+ * User Model
+ *
  * @property int $id
  * @property string $name
  * @property string $email
@@ -56,6 +58,13 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    /**
+     * Boot method for the User model.
+     *
+     * This method is called when the User model is booted. It sets up event listeners
+     * to perform actions when a user is created or deleted, such as sending a welcome email
+     * on user creation and deleting associated tasks on user deletion.
+     */
     protected static function boot(): void
     {
         parent::boot();
@@ -64,6 +73,14 @@ class User extends Authenticatable
         static::deleting(fn (User $user) => $user->tasks()->delete());
     }
 
+    /**
+     * Define the password attribute.
+     *
+     * This method defines the behavior of the 'password' attribute,
+     * including how it is retrieved and set (hashed).
+     *
+     * @return Attribute
+     */
     public function password(): Attribute
     {
         return Attribute::make(
@@ -72,11 +89,28 @@ class User extends Authenticatable
         );
     }
 
+    /**
+     * Define the relationship between User and Task models.
+     *
+     * This method defines the 'tasks' relationship, specifying that a User has many Task records.
+     *
+     * @return HasMany
+     */
     public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
     }
 
+    /**
+     * Resolve route model binding for the logged-in user.
+     *
+     * This method resolves route model binding for the logged-in user when using
+     * the `Auth::id()` as the binding value.
+     *
+     * @param mixed $value
+     * @param string|null $field
+     * @return Model|Relation|null
+     */
     public function resolveRouteBinding($value, $field = null): Model|Relation|null
     {
         return $this->resolveRouteBindingQuery($this, Auth::id(), $field)->first();
