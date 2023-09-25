@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::prefix('users')->as('user.')->group(function () {
+    Route::prefix('{user}')->group(function () {
+        Route::apiResource('tasks', TaskController::class);
+    });
+    Route::controller(UserController::class)->group(function () {
+        Route::post('login', 'login')->name('login');
+        Route::post('register', 'register')->withoutMiddleware('auth:sanctum')->name('register');
+        Route::delete('logout')->name('logout');
+    });
+})
+    ->middleware(['auth:sanctum']);
+//->scopeBindings();
