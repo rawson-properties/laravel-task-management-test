@@ -68,8 +68,9 @@ class User extends Authenticatable
     protected static function boot(): void
     {
         parent::boot();
-
+        //Sends a welcome email when a user is created
         static::created(fn (User $user) => SendWelcomeEmail::dispatch($user));
+        // Delete tasks related to the user being deleted
         static::deleting(fn (User $user) => $user->tasks()->delete());
     }
 
