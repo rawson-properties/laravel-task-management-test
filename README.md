@@ -1,56 +1,124 @@
-# laravel-task-management-test
+##### Frontend API Integration Guide
 
-## Introduction:
+This guide demonstrates how to use the API provided the task management backend. 
+You can use this guide to understand how to register a user, authenticate, perform CRUD operations on tasks, and log out.
 
-Welcome to the practical test for the Senior Engineering position. This test aims to evaluate your proficiency in Laravel, covering aspects such as writing tests, working with database migrations, creating relationships, building APIs, and utilising queues. Additionally, there's a bonus section focused on optimisation (Caching). Please carefully read the problem statement and adhere to the provided instructions.
+##### Prerequisites
 
-## Problem Statement:
+Before you start, ensure that you have the following prerequisites:
 
-You have been assigned the task of developing a basic web application for task management. The application should encompass the following functionalities:
+- A web frontend application or tool for making API requests (e.g. Postman).
+- Access to the backend API endpoints.
 
-   - User Registration
-   - Sending a Thank You email upon registration
-   - User Login and Logout
-   - CRUD operations for tasks
-   - Tasks should have a title, description, and due date (database fields)
-   - Each task should be associated with an owner (One-to-One Relationship)
-   - Each user can have multiple tasks in their task list (One-to-Many Relationship)
+##### User Registration
 
-**Requirements**
+To register a new user, send a POST request to the registration endpoint:
+Please note that registering does not require Bearer token header
 
-Establish a REST API to facilitate the above functionalities. You have the flexibility to decide on the specific endpoints, but consider the following suggestions:
+```
+POST /api/users/register
+```
 
-   - User account creation
-   - User login
-   - User logout
-   - Task creation (Secured Endpoint)
-   - Task update (Secured Endpoint)
-   - Task deletion (Secured Endpoint)
-   - Task listing for a user (Secured Endpoint)
+Include the following JSON payload in the request body:
 
-**Considerations**
+```json
+{
+    "name": "Your Name",
+    "email": "your@email.com",
+    "password": "your_password",
+    "confirm_password": "your_password"
+}
+```
 
-   - The API will be consumed by an SPA. Consider implementing JWT/OAuth-like services for security. You are free to choose, as long as you can justify your decision. I personally recommend using Sanctum or Passport due to their robust maintenance as core Laravel packages.
-   - Separate the Thank You email from the account creation flow for enhanced performance and user experience. (Hint: Utilise a queued Job).
-   - Implement caching for the task list, with a cache duration of 1 hour. The cache should be cleared after expiration (Bonus).
+Upon successful registration, you will receive a response with a user object, 
+including an access token for authentication.
 
-## Instructions:
+##### Authentication
 
-1. Fork this repository and create a new branch with your name for making changes.
-2. Implement changes to the application according to the problem statement.
-3. Write PHPUnit tests to cover the implemented features. Focus on testing critical functionalities.
-4. Create necessary migrations to set up the database schema for tasks and users.
-5. Use Laravel's built-in relationships to establish the one-to-one and one-to-many relationships between tasks and users.
-6. Configure and implement the background queue for sending email notifications.
-7. For the bonus section, implement caching for the task listing page.
-8. For exceptional distinction, provide documentation on how a frontend developer can authenticate with the API.
+To authenticate a user, send a POST request to the login endpoint:
 
-## Submission:
+```
+POST /api/users/login
+```
 
-Submit your pull request with the completed practical test. Include any necessary instructions on running the application and tests. Be prepared to explain your code and discuss your approach if necessary.
+Include the following JSON payload in the request body:
 
-## Note:
-- No graphical user interface (GUI) is required.
-- You may utilise any additional packages or libraries that you find beneficial.
-- Prioritise writing clean, maintainable code (SOLID principles).
-- Best of luck! We eagerly anticipate reviewing your work!
+```json
+{
+    "email": "your@email.com",
+    "password": "your_password"
+}
+```
+
+Upon successful authentication, you will receive a response with a user object and an access token.
+
+##### CRUD Operations on Tasks
+
+You can perform CRUD (Create, Read, Update, Delete) operations on tasks for the authenticated user.
+
+##### Create a Task
+
+To create a new task, send a POST request to the task creation endpoint:
+
+```
+POST /api/users/{user_id}/tasks
+```
+
+Include the following JSON payload in the request body:
+
+```json
+{
+    "title": "Task Title",
+    "description": "Task Description",
+    "due_date": "YYYY-MM-DD"
+}
+```
+
+Replace `{user_id}` with the authenticated user's ID.
+
+##### Retrieve Tasks
+
+To retrieve all tasks for the authenticated user, send a GET request to the task retrieval endpoint:
+
+```
+GET /api/users/{user_id}/tasks
+```
+
+Replace `{user_id}` with the authenticated user's ID.
+
+##### Update a Task
+
+To update an existing task, send a PUT request to the task update endpoint:
+
+```
+PUT /api/users/{user_id}/tasks/{task_id}
+```
+
+Include the following JSON payload in the request body:
+
+```json
+{
+    "title": "Updated Task Title",
+    "description": "Updated Task Description"
+}
+```
+
+Replace `{user_id}` with the authenticated user's ID and `{task_id}` with the ID of the task to update.
+
+##### Delete a Task
+
+To delete an existing task, send a DELETE request to the task deletion endpoint:
+
+```
+DELETE /api/users/{user_id}/tasks/{task_id}
+```
+
+Replace `{user_id}` with the authenticated user's ID and `{task_id}` with the ID of the task to delete.
+
+##### Logging Out
+
+To log out and invalidate the access token, send a DELETE request to the logout endpoint:
+
+```
+DELETE /api/users/logout
+```
